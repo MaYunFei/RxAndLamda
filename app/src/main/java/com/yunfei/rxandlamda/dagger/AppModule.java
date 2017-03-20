@@ -25,8 +25,8 @@ import rx.schedulers.Schedulers;
 
   @Singleton @Provides public Retrofit provideRetrofit(OkHttpClient okhttpClient) {
     Retrofit retrofit = new Retrofit.Builder().client(okhttpClient)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+        //.addConverterFactory(GsonConverterFactory.create())
+        //.addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
         .baseUrl("http://gank.io/api/")
         .build();
     return retrofit;

@@ -31,6 +31,8 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersion"
+
+
     compile "com.squareup.retrofit2:converter-scalars:$rootProject.retrofitVersion"
 
     //okhttp
@@ -43,4 +45,6 @@ dependencies {
     compile 'javax.annotation:jsr250-api:1.0'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.0.2'
     compile 'com.google.code.gson:gson:2.7'
+
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.3@aar'
 }

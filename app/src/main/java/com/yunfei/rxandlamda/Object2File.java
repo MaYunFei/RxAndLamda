@@ -38,6 +38,7 @@ public class Object2File {
     return INSTANCE;
   }
 
+
   public void init(Context context, Gson gson) {
     mGson = gson;
     try {

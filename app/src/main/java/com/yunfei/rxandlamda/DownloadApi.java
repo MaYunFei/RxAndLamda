@@ -1,8 +1,11 @@
 package com.yunfei.rxandlamda;
 
-import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.Response;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 import rx.Observable;
 
@@ -11,6 +14,9 @@ import rx.Observable;
  */
 
 public interface DownloadApi {
+  @Streaming @GET Observable<Response<ResponseBody>> downLoadFile(@Url String downloadUrl);
 
-  @GET Observable<Response<RequestBody>> downLoadFile(@Url String downloadUrl);
+  @Streaming @GET Observable<ResponseBody> downLoadFile2(@Url String downloadUrl);
+
+  @Streaming @GET Call<ResponseBody> downloadFile3(@Url String downloadUrl);
 }
