@@ -10,7 +10,6 @@ import android.widget.Button;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tbruyelle.rxpermissions.RxPermissions;
-import com.yunfei.rxandlamda.download.DownloadUtil;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

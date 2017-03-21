@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers;
 @Module public class AppModule {
   @Singleton @Provides public OkHttpClient provideOkHttpClient() {
     HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
     return new OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .build();
