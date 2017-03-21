@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tbruyelle.rxpermissions.RxPermissions;
+import com.yunfei.rxandlamda.download.DownloadUtil;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -497,40 +498,70 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //  }
     //}).start();
 
-    new Thread(new Runnable() {
-      @Override public void run() {
-        Request request =
-            new Request.Builder().url("http://apk.dongao.com/other/xianchangbaoming.apk").build();
-        okhttp3.Call call = mOkHttpClient.newCall(request);
-        OutputStream output = null;
-        InputStream input = null;
-        try {
-          okhttp3.Response response = call.execute();
+    //new Thread(new Runnable() {
+    //  @Override public void run() {
+    //    Request request =
+    //        new Request.Builder().url("http://s1.music.126.net/download/android/CloudMusic_2.8.1_official_4.apk").build();
+    //    okhttp3.Call call = mOkHttpClient.newCall(request);
+    //    OutputStream output = null;
+    //    InputStream input = null;
+    //    try {
+    //      long start = System.currentTimeMillis();
+    //      Log.e("yunfei start",start + "");
+    //      okhttp3.Response response = call.execute();
+    //      Log.e("yunfei end",(System.currentTimeMillis() - start) + "");
+    //
+    //      if (response.isSuccessful()) {
+    //        ResponseBody body = response.body();
+    //        long total = response.body().contentLength();
+    //        output = new FileOutputStream(
+    //            new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "888.apk"));
+    //        input = response.body().byteStream();
+    //        byte data[] = new byte[1024];
+    //        Log.i("yunfei", "00000000000000000");
+    //        long completed = 0;
+    //        int count;
+    //        while ((count = input.read(data)) != -1) {
+    //          completed += count;
+    //          output.write(data, 0, count);
+    //          //Log.i("yunfei", "completed = " + completed);
+    //        }
+    //      } else {
+    //      }
+    //    } catch (Exception e) {
+    //      e.printStackTrace();
+    //    } finally {
+    //      IOUtils.close(input, output);
+    //    }
+    //  }
+    //}).start();
 
-          if (response.isSuccessful()) {
-            ResponseBody body = response.body();
-            long total = response.body().contentLength();
-            output = new FileOutputStream(
-                new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "888.apk"));
-            input = response.body().byteStream();
-            byte data[] = new byte[1024];
-            Log.i("yunfei", "00000000000000000");
-            long completed = 0;
-            int count;
-            while ((count = input.read(data)) != -1) {
-              completed += count;
-              output.write(data, 0, count);
-              Log.i("yunfei", "completed = " + completed);
-            }
-          } else {
+    //DownloadUtil.get().download("http://s1.music.126.net/download/android/CloudMusic_2.8.1_official_4.apk", "download", new DownloadUtil.OnDownloadListener() {
+    //  @Override
+    //  public void onDownloadSuccess() {
+    //    Log.i("yunfei","downloadsuccess");
+    //  }
+    //  @Override
+    //  public void onDownloading(int progress) {
+    //    Log.i("yunfei","progress " + progress);
+    //  }
+    //  @Override
+    //  public void onDownloadFailed() {
+    //    Log.i("yunfei","onDownloadFailed ");
+    //  }
+    //});
+    RxDownload.RxDownload(downloadApi,"http://s1.music.126.net/download/android/CloudMusic_2.8.1_official_4.apk")
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Action1<Integer>() {
+          @Override public void call(Integer integer) {
+            Log.i("111111", "ddddddddddddd  " + integer);
           }
-        } catch (Exception e) {
-          e.printStackTrace();
-        } finally {
-          IOUtils.close(input, output);
-        }
-      }
-    }).start();
+        }, new Action1<Throwable>() {
+          @Override public void call(Throwable throwable) {
+            Log.i("!!!!!!!!!!!!!!!!!!!!!!!",throwable.toString());
+          }
+        });
 
     //Observable.create(new Observable.OnSubscribe<DownloadItem>() {
     //  @Override public void call(Subscriber<? super DownloadItem> subscriber) {
